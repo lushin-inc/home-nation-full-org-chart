@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Nation — Org Chart</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 64px;
+    }
+
+    h1 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 48px;
+    }
+
+    .tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ---- Cards ---- */
+    .card {
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 10px;
+      position: relative;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+    .card .name { font-weight: 600; line-height: 1.2; }
+    .card .role { font-weight: 400; margin-top: 2px; line-height: 1.2; }
+
+    .ceo .card {
+      background: #111;
+      color: #fff;
+      padding: 14px 32px;
+    }
+    .ceo .name { font-size: 18px; }
+    .ceo .role { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+    .mgr .card {
+      background: #f5f5f0;
+      border: 1.5px solid #ddd;
+    }
+    .mgr .name { font-size: 15px; color: #1a1a1a; }
+    .mgr .role { font-size: 11px; color: #777; }
+
+    .rep .card {
+      background: #fff;
+      border: 1px solid #e2e2e2;
+      padding: 8px 14px;
+    }
+    .rep .name { font-size: 13px; color: #333; }
+    .rep .role { font-size: 10px; color: #999; }
+
+    .support .card {
+      background: #f0faf5;
+      border: 1px solid #b8e6d0;
+      padding: 8px 14px;
+    }
+    .support .name { font-size: 13px; color: #1a1a1a; }
+    .support .role { font-size: 10px; color: #3a9e6e; }
+
+    /* ---- Connectors ---- */
+    .stem {
+      width: 1px;
+      background: #ccc;
+    }
+    .stem-sm { height: 20px; }
+    .stem-md { height: 28px; }
+
+    .h-line {
+      height: 1px;
+      background: #ccc;
+    }
+
+    /* ---- Layout ---- */
+    .mgr-row {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      width: 100%;
+    }
+
+    .branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      max-width: 380px;
+    }
+
+    .team-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 10px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 340px;
+    }
+
+    .team-grid > div { min-width: 72px; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 700px) {
+      body { padding: 32px 12px 48px; }
+      .mgr-row { flex-direction: column; align-items: center; gap: 32px; }
+      .branch { max-width: 100%; }
+      h1 { margin-bottom: 32px; }
+      .fork-connector { display: none; }
+    }
+
+    .fork-connector {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+    .fork-connector .h-line {
+      position: absolute;
+      top: 0;
+    }
+    .fork-connector .stem {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Home Nation — Organization</h1>
+
+  <div class="tree">
+
+    <!-- CEO -->
+    <div class="ceo">
+      <div class="card">
+        <div class="name">Quinton</div>
+        <div class="role">CEO</div>
+      </div>
+    </div>
+
+    <div class="stem stem-md"></div>
+
+    <!-- Fork to two managers -->
+    <svg width="400" height="1" style="overflow:visible;display:block;">
+      <line x1="0" y1="0" x2="400" y2="0" stroke="#ccc" stroke-width="1"/>
+    </svg>
+
+    <div class="mgr-row">
+
+      <!-- Left branch: Loren -->
+      <div class="branch">
+        <div class="stem stem-sm"></div>
+        <div class="mgr">
+          <div class="card">
+            <div class="name">Loren</div>
+            <div class="role">Manager</div>
+          </div>
+        </div>
+        <div class="stem stem-md"></div>
+        <div class="team-label">8 direct reports</div>
+        <div class="team-grid">
+          <div class="rep"><div class="card"><div class="name">Alyssa</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Blake</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Cassie</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Dan</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Gabe</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Jeff</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Nettie</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Salvador</div><div class="role">Sales</div></div></div>
+        </div>
+      </div>
+
+      <!-- Right branch: Sam -->
+      <div class="branch">
+        <div class="stem stem-sm"></div>
+        <div class="mgr">
+          <div class="card">
+            <div class="name">Sam</div>
+            <div class="role">Manager</div>
+          </div>
+        </div>
+        <div class="stem stem-md"></div>
+        <div class="team-label">10 direct reports</div>
+        <div class="team-grid">
+          <div class="support"><div class="card"><div class="name">Ann</div><div class="role">Support / Loans</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Autumn</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Carly</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Erica</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Garrett</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Jewel</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Justin</div><div class="role">Sales</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Mary</div><div class="role">Sales</div></div></div>
+          <div class="support"><div class="card"><div class="name">Nicole</div><div class="role">Support / Loans</div></div></div>
+          <div class="rep"><div class="card"><div class="name">Shay</div><div class="role">Sales</div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
